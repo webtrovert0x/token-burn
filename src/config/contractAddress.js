@@ -1,0 +1,1 @@
+export const TOKEN_BURNER_ADDRESS = '0x3b1b1a76ed62527f578a784594cc1d8be168ab0b'
