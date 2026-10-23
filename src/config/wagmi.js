@@ -1,17 +1,17 @@
 import { createAppKit } from '@reown/appkit/react'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
-import { botTestnet } from './chain'
+import { botMainnet } from './chain'
 
 const projectId = import.meta.env.VITE_REOWN_PROJECT_ID || ''
 
 const metadata = {
   name: 'BOT Token Burner',
-  description: 'Permanently reduce circulating supply of ERC-20 tokens on BotChain Protocol',
+  description: 'Permanently reduce circulating supply of ERC-20 tokens on BotChain Protocol Mainnet',
   url: window.location.origin,
   icons: ['https://avatars.githubusercontent.com/u/179229932'],
 }
 
-const networks = [botTestnet]
+const networks = [botMainnet]
 
 export const wagmiAdapter = new WagmiAdapter({
   networks,
@@ -22,6 +22,7 @@ export const wagmiAdapter = new WagmiAdapter({
 createAppKit({
   adapters: [wagmiAdapter],
   networks,
+  defaultNetwork: botMainnet,
   projectId,
   metadata,
   features: {

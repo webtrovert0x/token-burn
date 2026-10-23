@@ -86,7 +86,7 @@ export default function BurnHistory({ history, onClearHistory }) {
                         {entry.tokenSymbol || 'Token'}
                       </span>
                       <a
-                        href={`https://scan.bohr.life/address/${entry.tokenAddress}`}
+                        href={`https://scan.botchain.ai/address/${entry.tokenAddress}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hash-link"
@@ -115,7 +115,7 @@ export default function BurnHistory({ history, onClearHistory }) {
                   </td>
                   <td>
                     <a
-                      href={`https://scan.bohr.life/tx/${entry.txHash}`}
+                      href={`https://scan.botchain.ai/tx/${entry.txHash}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hash-link"

@@ -1,8 +1,8 @@
 import { defineChain } from 'viem'
 
-export const botTestnet = defineChain({
-  id: 968,
-  name: 'BOT Testnet',
+export const botMainnet = defineChain({
+  id: 677,
+  name: 'BotChain Mainnet',
   nativeCurrency: {
     decimals: 18,
     name: 'BOT',
@@ -10,13 +10,13 @@ export const botTestnet = defineChain({
   },
   rpcUrls: {
     default: {
-      http: ['https://rpc.bohr.life'],
+      http: ['https://rpc.botchain.ai'],
     },
   },
   blockExplorers: {
     default: {
-      name: 'BOT Explorer',
-      url: 'https://scan.bohr.life',
+      name: 'BotChain Explorer',
+      url: 'https://scan.botchain.ai',
     },
   },
 })

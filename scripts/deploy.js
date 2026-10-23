@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import solc from 'solc'
-import { createWalletClient, createPublicClient, http } from 'viem'
+import { createWalletClient, createPublicClient, http, formatEther } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { fileURLToPath } from 'url'
 
@@ -34,21 +34,21 @@ const formattedKey = rawKey.startsWith('0x') ? rawKey : `0x${rawKey}`
 const account = privateKeyToAccount(formattedKey)
 
 const botChain = {
-  id: 968,
-  name: 'BOT Testnet',
+  id: 677,
+  name: 'BotChain Mainnet',
   nativeCurrency: { decimals: 18, name: 'BOT', symbol: 'BOT' },
-  rpcUrls: { default: { http: ['https://rpc.bohr.life'] } },
+  rpcUrls: { default: { http: ['https://rpc.botchain.ai'] } },
 }
 
 const client = createWalletClient({
   account,
   chain: botChain,
-  transport: http('https://rpc.bohr.life'),
+  transport: http('https://rpc.botchain.ai'),
 })
 
 const publicClient = createPublicClient({
   chain: botChain,
-  transport: http('https://rpc.bohr.life'),
+  transport: http('https://rpc.botchain.ai'),
 })
 
 async function compileContract() {
@@ -90,28 +90,49 @@ async function compileContract() {
 }
 
 async function main() {
-  console.log(`\nDeploying from deployer account: ${account.address}`)
+  console.log(`\n🚀 Deploying TokenBurner to BotChain Mainnet (Chain ID 677)`)
+  console.log(`Deployer account: ${account.address}`)
 
   const balance = await publicClient.getBalance({ address: account.address })
-  console.log(`Account BOT balance: ${balance} wei`)
+  console.log(`Account BOT balance: ${formatEther(balance)} BOT`)
 
   const { abi, bytecode } = await compileContract()
 
+  // Estimate exact gas and gas price to minimize fee
+  const gasEstimate = await publicClient.estimateGas({
+    account: account.address,
+    data: bytecode,
+  })
+  const gasPrice = await publicClient.getGasPrice()
+  const estCost = gasEstimate * gasPrice
+  console.log(`Estimated gas units: ${gasEstimate.toString()}`)
+  console.log(`Network gas price: ${gasPrice.toString()} wei (${formatEther(gasPrice * 1000000000n)} Gwei approx)`)
+  console.log(`Estimated deployment fee: ~${formatEther(estCost)} BOT (optimized)`)
+
   console.log('Broadcasting deployment transaction...')
+  // Add 10% gas margin to avoid out of gas without overpaying (unused gas is refunded)
+  const gasLimit = (gasEstimate * 110n) / 100n
+
   const hash = await client.deployContract({
     abi,
     bytecode,
     account,
+    gas: gasLimit,
+    gasPrice,
   })
 
-  console.log(`Transaction sent: https://scan.bohr.life/tx/${hash}`)
+  console.log(`Transaction sent: https://scan.botchain.ai/tx/${hash}`)
   console.log('Waiting for receipt...')
 
   const receipt = await publicClient.waitForTransactionReceipt({ hash })
   const contractAddress = receipt.contractAddress
 
-  console.log(`\n🎉 TokenBurner deployed to: ${contractAddress}`)
-  console.log(`Explorer: https://scan.bohr.life/address/${contractAddress}`)
+  console.log(`\n🎉 TokenBurner successfully deployed on Mainnet!`)
+  console.log(`Contract Address: ${contractAddress}`)
+  console.log(`Gas Used: ${receipt.gasUsed.toString()} units`)
+  const actualCost = receipt.gasUsed * (receipt.effectiveGasPrice || gasPrice)
+  console.log(`Actual Fee Spent: ${formatEther(actualCost)} BOT`)
+  console.log(`Explorer: https://scan.botchain.ai/address/${contractAddress}`)
 
   // Save to config file
   const configPath = path.resolve(__dirname, '../src/config/contractAddress.js')

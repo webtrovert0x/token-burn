@@ -47,7 +47,7 @@ export default function BurnForm({
           </div>
         </div>
         <a
-          href={`https://scan.bohr.life/address/${tokenBurnerAddress}#code`}
+          href={`https://scan.botchain.ai/address/${tokenBurnerAddress}#code`}
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-secondary btn-sm"
@@ -199,7 +199,7 @@ export default function BurnForm({
                 <span className="burn-preview-label">Target Contract (To)</span>
                 <span className="burn-preview-value" style={{ fontFamily: 'monospace', fontSize: 12 }}>
                   <a
-                    href={`https://scan.bohr.life/address/${useContractHelper ? tokenBurnerAddress : tokenInfo.address}`}
+                    href={`https://scan.botchain.ai/address/${useContractHelper ? tokenBurnerAddress : tokenInfo.address}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: 'var(--red-400)', textDecoration: 'none' }}

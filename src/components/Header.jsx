@@ -1,15 +1,18 @@
 import { useAppKit } from '@reown/appkit/react'
-import { useAccount } from 'wagmi'
+import { useAccount, useChainId } from 'wagmi'
 import { TOKEN_BURNER_ADDRESS } from '../config/contractAddress'
 
 export default function Header() {
   const { open } = useAppKit()
   const { address, isConnected } = useAccount()
+  const chainId = useChainId()
 
   const shorten = (addr) => {
     if (!addr) return ''
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`
   }
+
+  const isMainnet = chainId === 677
 
   return (
     <header className="header">
@@ -46,12 +49,12 @@ export default function Header() {
               boxShadow: '0 0 8px #22c55e',
               display: 'inline-block',
             }} />
-            <span>BOT Testnet</span>
+            <span>BotChain Mainnet</span>
           </div>
 
           {TOKEN_BURNER_ADDRESS && (
             <a
-              href={`https://scan.bohr.life/address/${TOKEN_BURNER_ADDRESS}`}
+              href={`https://scan.botchain.ai/address/${TOKEN_BURNER_ADDRESS}#code`}
               target="_blank"
               rel="noopener noreferrer"
               style={{

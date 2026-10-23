@@ -17,7 +17,7 @@ function getContractAddress() {
 }
 
 const contractAddress = getContractAddress()
-console.log(`\n🔍 Verifying TokenBurner contract at: ${contractAddress}`)
+console.log(`\n🔍 Verifying TokenBurner contract on BotChain Mainnet at: ${contractAddress}`)
 
 const sourcePath = path.resolve(__dirname, '../contracts/TokenBurner.sol')
 const sourceCode = fs.readFileSync(sourcePath, 'utf8')
@@ -25,8 +25,8 @@ const sourceCode = fs.readFileSync(sourcePath, 'utf8')
 const compilerVersion = 'v0.8.20+commit.a1b79de6'
 
 async function verifyBlockscoutV2() {
-  console.log(`Submitting verification via Blockscout v2 API...`)
-  const url = `https://scan.bohr.life/api/v2/smart-contracts/${contractAddress}/verification/via/flattened-code`
+  console.log(`Submitting verification via Blockscout v2 API on BotChain Mainnet...`)
+  const url = `https://scan.botchain.ai/api/v2/smart-contracts/${contractAddress}/verification/via/flattened-code`
 
   const payload = {
     compiler_version: compilerVersion,
@@ -58,8 +58,8 @@ async function verifyBlockscoutV2() {
 }
 
 async function verifyEtherscanCompat() {
-  console.log(`Submitting verification via Etherscan-compatible API...`)
-  const url = `https://scan.bohr.life/api`
+  console.log(`Submitting verification via Etherscan-compatible API on BotChain Mainnet...`)
+  const url = `https://scan.botchain.ai/api`
 
   const params = new URLSearchParams()
   params.append('module', 'contract')
@@ -91,7 +91,7 @@ async function verifyEtherscanCompat() {
 }
 
 async function checkStatus() {
-  const checkUrl = `https://scan.bohr.life/api?module=contract&action=getabi&address=${contractAddress}`
+  const checkUrl = `https://scan.botchain.ai/api?module=contract&action=getabi&address=${contractAddress}`
   const res = await fetch(checkUrl)
   const data = await res.json()
   return data.status === '1'
@@ -114,18 +114,18 @@ async function main() {
 
   // Poll for verification status
   console.log('\nChecking verification status on-chain...')
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 12; i++) {
     await new Promise((r) => setTimeout(r, 3000))
     const isVerified = await checkStatus()
     if (isVerified) {
-      console.log(`\n✅ Contract verified successfully!`)
-      console.log(`View on Explorer: https://scan.bohr.life/address/${contractAddress}#code`)
+      console.log(`\n✅ Contract verified successfully on BotChain Mainnet!`)
+      console.log(`View on Explorer: https://scan.botchain.ai/address/${contractAddress}#code`)
       return
     }
     process.stdout.write('.')
   }
 
-  console.log(`\nVerification submitted. Check status at: https://scan.bohr.life/address/${contractAddress}#code`)
+  console.log(`\nVerification submitted. Check status at: https://scan.botchain.ai/address/${contractAddress}#code`)
 }
 
 main().catch(console.error)

@@ -8,6 +8,7 @@ import BurnForm from './components/BurnForm'
 import BurnHistory from './components/BurnHistory'
 import ConnectPrompt from './components/ConnectPrompt'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 const BURN_HISTORY_KEY = 'bot_token_burn_history_v3'
 const DEAD_ADDRESS = '0x000000000000000000000000000000000000dEaD'
@@ -424,22 +425,7 @@ function App() {
         )}
       </main>
 
-      <footer className="footer">
-        <p>
-          BOT Token Burner &middot; Verified Contract:{' '}
-          <a
-            href={`https://scan.bohr.life/address/${TOKEN_BURNER_ADDRESS}#code`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <code>{TOKEN_BURNER_ADDRESS.slice(0, 8)}...{TOKEN_BURNER_ADDRESS.slice(-6)}</code> ↗
-          </a>{' '}
-          &middot; Powered by{' '}
-          <a href="https://scan.bohr.life" target="_blank" rel="noopener noreferrer">
-            BotChain Protocol
-          </a>
-        </p>
-      </footer>
+      <Footer />
     </div>
   )
 }

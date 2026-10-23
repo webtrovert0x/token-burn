@@ -1,9 +1,9 @@
 # BOT Token Burner: Technical Whitepaper
 ### Verifiable, Multi-Mechanism Circulating Supply Reduction Protocol
 **Protocol Version:** 1.0.0  
-**Target Network:** BotChain Protocol Testnet (Chain ID: `968`)  
-**Helper Contract Address:** [`0x3b1b1a76ed62527f578a784594cc1d8be168ab0b`](https://scan.bohr.life/address/0x3b1b1a76ed62527f578a784594cc1d8be168ab0b#code)  
-**Contract Verification Status:** Verified on [Bohr Scan](https://scan.bohr.life/address/0x3b1b1a76ed62527f578a784594cc1d8be168ab0b#code)  
+**Target Network:** BotChain Protocol Mainnet (Chain ID: `677`)  
+**Helper Contract Address:** [`0x9dd5b94720462f3f2f76266c833cb6f19e22f312`](https://scan.botchain.ai/address/0x9dd5b94720462f3f2f76266c833cb6f19e22f312#code)  
+**Contract Verification Status:** Verified on [BotChain Scan](https://scan.botchain.ai/address/0x9dd5b94720462f3f2f76266c833cb6f19e22f312#code)  
 
 ---
 
@@ -56,7 +56,7 @@ The BOT Token Burner combines a lightweight Solidity smart contract (`TokenBurne
                  |                                           |
                  v                                           v
    +---------------------------+               +---------------------------+
-   | Direct Wallet Execution   |               | Compatible Mechanism:     |
+   | Direct / Helper Burn      |               | Compatible Mechanism:     |
    | - Calls token.burn()      |               | - Route to Dead Address   |
    | - Supply decremented      |               |   (0x0...dEaD)            |
    +---------------------------+               +---------------------------+
@@ -67,7 +67,7 @@ The BOT Token Burner combines a lightweight Solidity smart contract (`TokenBurne
                +------------------------------------------------+
                |        On-Chain Logging & Verification         |
                | - TokensBurned Event (TokenBurner.sol)         |
-               | - Bohr Scan Explorer Receipt                   |
+               | - BotChain Scan Explorer Receipt               |
                +------------------------------------------------+
 ```
 
@@ -97,11 +97,11 @@ contract TokenBurner {
 }
 ```
 
-#### Contract Verification on Bohr Scan
-- **Address:** `0x3b1b1a76ed62527f578a784594cc1d8be168ab0b`
+#### Contract Verification on BotChain Scan
+- **Address:** `0x9dd5b94720462f3f2f76266c833cb6f19e22f312`
 - **Compiler:** `v0.8.20+commit.a1b79de6`
 - **Optimization:** `Enabled` (200 runs)
-- **Verified Code:** [View on scan.bohr.life](https://scan.bohr.life/address/0x3b1b1a76ed62527f578a784594cc1d8be168ab0b#code)
+- **Verified Code:** [View on scan.botchain.ai](https://scan.botchain.ai/address/0x9dd5b94720462f3f2f76266c833cb6f19e22f312#code)
 
 ---
 
@@ -147,15 +147,16 @@ For tokens lacking native burn functions:
 
 | Parameter | Specification |
 |---|---|
-| **Network Name** | BotChain Protocol Testnet |
-| **Chain ID** | `968` |
-| **Native Currency** | BOT |
-| **RPC Endpoint** | `https://rpc.bohr.life` |
-| **Block Explorer** | `https://scan.bohr.life/` |
-| **Deployed Helper** | `0x3b1b1a76ed62527f578a784594cc1d8be168ab0b` |
+| **Network Name** | BotChain Protocol Mainnet |
+| **Chain ID** | `677` |
+| **Native Currency** | BOT (18 Decimals) |
+| **Total Supply** | 150,000,000 BOT |
+| **RPC Endpoint** | `https://rpc.botchain.ai` |
+| **Block Explorer** | `https://scan.botchain.ai/` |
+| **Deployed Helper** | `0x9dd5b94720462f3f2f76266c833cb6f19e22f312` |
 
 ---
 
 ## 7. Conclusion
 
-BOT Token Burner resolves the fragmentation of token burning across the BotChain ecosystem. By combining client-side simulation, allowance detection, audited helper execution, and transparent explorer verification, it delivers a secure, deterministic interface for circulating supply reduction.
+BOT Token Burner resolves the fragmentation of token burning across the BotChain ecosystem. By combining client-side simulation, allowance detection, audited helper execution, and transparent explorer verification, it delivers a secure, deterministic interface for circulating supply reduction on BotChain Mainnet.

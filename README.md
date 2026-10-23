@@ -1,8 +1,8 @@
 # BOT Token Burner 🔥
-> A secure, verifiable interface and smart contract protocol for burning ERC-20 tokens and permanently reducing circulating supply on **BotChain Protocol**.
+> A secure, verifiable interface and smart contract protocol for burning ERC-20 tokens and permanently reducing circulating supply on **BotChain Protocol Mainnet**.
 
-[![Network: BOT Testnet 968](https://img.shields.io/badge/Network-BOT_Testnet_968-dc2626)](https://scan.bohr.life/)
-[![Contract Verified](https://img.shields.io/badge/Contract-Verified_on_Bohr_Scan-22c55e)](https://scan.bohr.life/address/0x3b1b1a76ed62527f578a784594cc1d8be168ab0b#code)
+[![Network: BotChain Mainnet 677](https://img.shields.io/badge/Network-BotChain_Mainnet_677-dc2626)](https://scan.botchain.ai/)
+[![Contract Verified](https://img.shields.io/badge/Contract-Verified_on_BotChain_Scan-22c55e)](https://scan.botchain.ai/address/0x9dd5b94720462f3f2f76266c833cb6f19e22f312#code)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
@@ -15,20 +15,21 @@ A generic helper contract cannot unilaterally force an arbitrary token to destro
 1. Dynamically checking whether the token contract supports native burning (`burn(uint256)` or `burnFrom(address, uint256)`).
 2. Requesting required approvals if burning via allowance or through the helper contract.
 3. Executing the appropriate burn method or a compatible burn mechanism (`0x...dEaD` transfer fallback).
-4. Logging real-time burn transaction history with direct verification links on **Bohr Scan**.
+4. Logging real-time burn transaction history with direct verification links on **BotChain Explorer**.
 
 ---
 
-## 🔗 On-Chain Contract Information
+## 🔗 On-Chain Contract Information (BotChain Mainnet)
 
 - **Contract Name:** `TokenBurner.sol`
-- **Network:** BotChain Protocol Testnet
-- **Chain ID:** `968`
-- **RPC Endpoint:** `https://rpc.bohr.life`
-- **Native Currency:** `BOT`
-- **Deployed Address:** [`0x3b1b1a76ed62527f578a784594cc1d8be168ab0b`](https://scan.bohr.life/address/0x3b1b1a76ed62527f578a784594cc1d8be168ab0b#code)
-- **Deployment Transaction:** [`0xa5436b7a0245360b423d2a065f2fb28419b90e47a590dc61be58ba4e8745135e`](https://scan.bohr.life/tx/0xa5436b7a0245360b423d2a065f2fb28419b90e47a590dc61be58ba4e8745135e)
-- **Explorer Verification:** Verified on [Bohr Scan](https://scan.bohr.life/address/0x3b1b1a76ed62527f578a784594cc1d8be168ab0b#code) (Solidity `v0.8.20`, Optimization 200 runs).
+- **Network:** BotChain Protocol Mainnet
+- **Chain ID:** `677`
+- **RPC Endpoint:** `https://rpc.botchain.ai`
+- **Native Currency:** `BOT` (18 Decimals)
+- **Total Supply:** `150,000,000 BOT`
+- **Deployed Address:** [`0x9dd5b94720462f3f2f76266c833cb6f19e22f312`](https://scan.botchain.ai/address/0x9dd5b94720462f3f2f76266c833cb6f19e22f312#code)
+- **Deployment Transaction:** [`0x8c421730a8e6006a7a9b3db3ea5e6bf96b26c6ded1aaf4e174f05ae004ff05c9`](https://scan.botchain.ai/tx/0x8c421730a8e6006a7a9b3db3ea5e6bf96b26c6ded1aaf4e174f05ae004ff05c9)
+- **Explorer Verification:** Verified on [BotChain Scan](https://scan.botchain.ai/address/0x9dd5b94720462f3f2f76266c833cb6f19e22f312#code) (Solidity `v0.8.20`, Optimization 200 runs).
 
 ---
 
@@ -43,7 +44,7 @@ A generic helper contract cannot unilaterally force an arbitrary token to destro
 - **Two-Step Approval Flow:** Automatically detects whether allowance is required and provides clean, guided approval execution.
 - **Burn Transaction History:** Logs all transactions with token metadata, amount destroyed, execution method, and direct explorer links.
 - **Grayish-Black & Crimson Design:** Sleek charcoal background with vibrant fire-red buttons and glow accents.
-- **Reown AppKit + Wagmi v2:** Modern wallet connectivity with full multi-wallet support on BotChain.
+- **Reown AppKit + Wagmi v2:** Modern wallet connectivity with full multi-wallet support on BotChain Mainnet.
 
 ---
 
@@ -54,7 +55,7 @@ token-burn/
 ├── contracts/
 │   └── TokenBurner.sol            # Smart contract helper & event logger
 ├── scripts/
-│   ├── deploy.js                  # Deployment script for BotChain Testnet
+│   ├── deploy.js                  # Gas-optimized deployment script for BotChain Mainnet
 │   └── verify.js                  # Terminal verification script via Blockscout API
 ├── src/
 │   ├── components/
@@ -64,7 +65,7 @@ token-burn/
 │   │   └── Header.jsx             # Top bar with network status & contract link
 │   ├── config/
 │   │   ├── abi.js                 # ERC-20, Burn, and TokenBurner ABIs
-│   │   ├── chain.js               # BOT Testnet chain configuration (968)
+│   │   ├── chain.js               # BotChain Mainnet (677) chain configuration
 │   │   ├── contractAddress.js     # Export of deployed TokenBurner address
 │   │   └── wagmi.js               # Reown AppKit & Wagmi adapter setup
 │   ├── App.jsx                    # Core application logic & on-chain state
@@ -84,7 +85,7 @@ token-burn/
 
 ### 1. Prerequisites
 - Node.js `v18+` or `v20+`
-- An EVM-compatible wallet (e.g. MetaMask) configured with BOT Testnet
+- An EVM-compatible wallet (e.g. MetaMask) configured with BotChain Mainnet (Chain ID `677`)
 
 ### 2. Installation
 ```bash
@@ -119,14 +120,14 @@ Open your browser at `http://localhost:5174/`.
 
 ## 🛠 Terminal Commands
 
-### Compile & Deploy Contract
-Deploys `TokenBurner.sol` using your deployer account on BOT Testnet:
+### Compile & Deploy Contract (Gas-Optimized)
+Deploys `TokenBurner.sol` to BotChain Mainnet with minimal gas fee:
 ```bash
 npm run deploy
 ```
 
-### Verify Contract on Bohr Scan
-Submits source code and compiler metadata to the Bohr Scan API:
+### Verify Contract on BotChain Scan
+Submits source code and compiler metadata to the BotChain Scan API:
 ```bash
 npm run verify
 ```
